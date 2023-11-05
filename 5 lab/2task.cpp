@@ -100,7 +100,7 @@ int main()
             int x;
             cin >> x;
             stack.push(x);
-            if (minStack.isEmpty() || x <= minStack.peek()) // Update the minimum value
+            if (minStack.isEmpty() || x <= minStack.peek())
             {
                 minStack.push(x);
             }
@@ -115,7 +115,7 @@ int main()
         }
         else if (operation == 3)
         {
-            cout << minStack.peek() << endl; // Print the minimum element
+            cout << minStack.peek() << endl;
         }
     }
 
