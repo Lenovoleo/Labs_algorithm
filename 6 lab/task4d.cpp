@@ -1,65 +1,65 @@
 #include <iostream>
-#include <algorithm>
+
 using namespace std;
-const int MAX_GRADE = 50;
-double midGrade(int arr[], int size)
+
+double midBall(int balls[], int size)
 {
-    double sum = 0;
-    for (int i = 0; i < size; i++)
+    double total = 0;
+    for (int i = 0; i < size; ++i)
     {
-        sum += arr[i];
+        total += balls[i];
     }
-    return size == 0 ? 0 : sum / size;
+    return size == 0 ? 0 : total / size;
 }
-void selectionSort(int arr[][MAX_GRADE], int n)
+
+void bubbleSort(int arr[][100], int size[], int n)
 {
     for (int i = 0; i < n - 1; i++)
     {
-        int minIdx = i;
-        for (int j = i + 1; j < n; j++)
+        for (int j = 0; j < n - i - 1; j++)
         {
-            if (midGrade(arr[j], MAX_GRADE) < midGrade(arr[minIdx], MAX_GRADE))
+            if (midBall(arr[j], size[j]) > midBall(arr[j + 1], size[j + 1]))
             {
-                minIdx = j;
+                swap(arr[j], arr[j + 1]);
+                swap(size[j], size[j + 1]);
             }
-        }
-        if (minIdx != i)
-        {
-            swap_ranges(arr[i], arr[i] + MAX_GRADE, arr[minIdx]);
         }
     }
 }
+
 int main()
 {
-    int n = 0;
-    cin >> n;
-    int arr[MAX_GRADE][MAX_GRADE];
-    for (int i = 0; i < n; i++)
+    int num;
+    cin >> num;
+
+    int arr[100][100];
+    int size[100];
+    for (int i = 0; i < num; ++i)
     {
-        int balls[MAX_GRADE];
-        int ball, count = 0;
+        int ball, j = 0;
+
         while (cin >> ball)
         {
-            balls[count++] = ball;
+            arr[i][j++] = ball;
             if (cin.peek() == '\n')
             {
                 break;
             }
         }
-        copy(balls, balls + MAX_GRADE, arr[i]);
+        size[i] = j;
         cin.ignore();
     }
-    selectionSort(arr, n);
 
-    for (int i = 0; i < n; i++)
+    bubbleSort(arr, size, num);
+
+    for (int i = 0; i < num; ++i)
     {
-        for (int j = 0; j < MAX_GRADE; j++)
+        for (int j = 0; j < size[i]; ++j)
         {
-            if (arr[i][j] != 0)
-            {
-                cout << arr[i][j] << " ";
-            }
+            cout << arr[i][j] << " ";
         }
-        cout << endl;
+        cout << "\n";
     }
+
+    return 0;
 }
